@@ -1,0 +1,73 @@
+  {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+    <link rel="stylesheet" href="emp.css">
+    <link rel="stylesheet" href="{% static 'emp.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    </nav>
+    <form action="" method="POST" >  <!-- title -->
+     {% csrf_token %}
+    <h1 class="tit">SIGN UP</h1>
+    
+    <!-- login box -->
+   <div class="box">
+    <!-- user id  -->
+    <div class="first">
+        
+        <!-- id -->
+        <label for="userid">ENTER NAME</label>
+        <input type="text" id="id" name="id" placeholder="Enter Your Name" required>
+        </div>
+        <div class="e">
+        <p>{{error}}</p>
+        </div>
+        <div class="second">
+         <!-- pass-->
+          
+            <label for="password">PASSWORD</label>
+        <input type="password" id="pass" name="pass" placeholder="Enter Your Password" required>
+       </div>
+       {% comment %} first name {% endcomment %}
+        <div class="first">
+        
+        <!-- first-->
+        <label for="first name">ENTER FIRST NAME</label>
+        <input type="text" id="id" name="fn" placeholder="Enter Your First Name" required>
+        </div>
+        <div class="first">
+        
+        <!-- first-->
+        <label for="Last name">ENTER LAST NAME</label>
+        <input type="text" id="id" name="ln" placeholder="Enter Your Last Name" required>
+        </div>
+
+        <div class="first">
+        
+        <!-- email-->
+        <label for="Last name">ENTER YOUR E-MAIL</label> 
+        <input type="email" id="id" name="em" placeholder="Enter Your E-mail" required>
+        </div>
+        <div class="second">
+         <!-- pass-->
+          
+            <label for="age">AGE</label>
+        <input type="number" id="AGE" name="age" placeholder="Enter Your Age" required>
+       </div>
+       
+
+
+
+       <div class="sub">    
+    <button type="submit">LOGIN</button>
+    </div>
+</div>
+</form>
+</body>
+</html>

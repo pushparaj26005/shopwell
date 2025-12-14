@@ -1,0 +1,131 @@
+ {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{% static 's.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="header-title">
+                    <h1>💰 Expense Tracker</h1>
+                    <div class="total-expenses">
+                        Total Spent: $<span id="totalAmount">0.00</span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <a href="/rsin/home/" id="logoutBtn" class="logout-btn"  >
+                        <span>🚪</span> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="expense-form">
+                <h2>Add New Expense</h2>
+                <form id="expenseForm">
+                    <div class="form-group">
+                        <label for="amount">Amount ($)</label>
+                        <input type="number" id="amount" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <select id="category" required>
+                            <option value="">Select a category</option>
+                            <option value="Food & Dining">🍕 Food & Dining</option>
+                            <option value="Transportation">🚗 Transportation</option>
+                            <option value="Shopping">🛍️ Shopping</option>
+                            <option value="Entertainment">🎬 Entertainment</option>
+                            <option value="Bills & Utilities">⚡ Bills & Utilities</option>
+                            <option value="Healthcare">🏥 Healthcare</option>
+                            <option value="Education">📚 Education</option>
+                            <option value="Travel">✈️ Travel</option>
+                            <option value="Personal Care">💄 Personal Care</option>
+                            <option value="Other">📦 Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" placeholder="What did you spend on?" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <button type="submit" class="btn">Add Expense</button>
+                </form>
+            </div>
+
+            <div class="expenses-section">
+                <h2>Your Expenses</h2>
+                
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalExpenses">0</div>
+                        <div class="stat-label">Total Transactions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="averageExpense">$0.00</div>
+                        <div class="stat-label">Average per Transaction</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="highestExpense">$0.00</div>
+                        <div class="stat-label">Highest Expense</div>
+                    </div>
+                </div>
+
+                <div class="filters">
+                    <div class="filter-group">
+                        <label for="searchFilter">Search</label>
+                        <input type="text" id="searchFilter" placeholder="Search by description...">
+                    </div>
+                    <div class="filter-group">
+                        <label for="categoryFilter">Filter by Category</label>
+                        <select id="categoryFilter">
+                            <option value="">All Categories</option>
+                            <option value="Food & Dining">🍕 Food & Dining</option>
+                            <option value="Transportation">🚗 Transportation</option>
+                            <option value="Shopping">🛍️ Shopping</option>
+                            <option value="Entertainment">🎬 Entertainment</option>
+                            <option value="Bills & Utilities">⚡ Bills & Utilities</option>
+                            <option value="Healthcare">🏥 Healthcare</option>
+                            <option value="Education">📚 Education</option>
+                            <option value="Travel">✈️ Travel</option>
+                            <option value="Personal Care">💄 Personal Care</option>
+                            <option value="Other">📦 Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="category-filters">
+                    <button class="category-btn active" data-category="">All</button>
+                    <button class="category-btn" data-category="Food & Dining">🍕 Food</button>
+                    <button class="category-btn" data-category="Transportation">🚗 Transport</button>
+                    <button class="category-btn" data-category="Shopping">🛍️ Shopping</button>
+                    <button class="category-btn" data-category="Entertainment">🎬 Entertainment</button>
+                    <button class="category-btn" data-category="Bills & Utilities">⚡ Bills</button>
+                </div>
+
+                <div class="expenses-list" id="expensesList">
+                    <div class="empty-state">
+                        <div style="font-size: 48px; margin-bottom: 20px;">📊</div>
+                        <h3>No expenses yet</h3>
+                        <p>Start tracking your spending by adding your first expense!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script src="{% static 'utils.js' %}"></script>
+
+<script src="{% static 'script.js' %}"></script>
+
+</body>
+</html>

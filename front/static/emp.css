@@ -1,0 +1,125 @@
+*{
+background-color:  #0B192C;;
+}
+.tit{
+    text-align: center;
+    font-family: "Audiowide",sans-serif;
+    color: white;
+    font-weight: lighter;
+}
+.box{
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(230, 227, 227, 0.2);
+    padding: 10px 20px;
+    transition: transform 0.2s;
+    width: 400px;
+    height: auto;
+    text-align: center;
+    margin-top: 100px;
+    margin-left: 550px;
+    
+}
+.first{
+    margin-top: 70px;
+    font-size: 20px;
+}
+
+.second{
+     margin-top: 10px;
+    font-size: 20px;
+}
+.first label {
+    display: block;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-bottom: 20px;
+    text-align: left;
+    color: white;
+    font-weight: lighter;
+    font-family: "Audiowide",sans-serif;
+}
+.second label{
+    display: block;
+    margin-top: 50px;
+    margin-left: 1px;
+    text-align: left;
+    color: white;
+    font-weight: lighter;
+    font-family: "Audiowide",sans-serif;
+}
+.first input{
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: white;
+}
+.second input {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: white;
+}
+
+.second input :hover{
+    transform: perspective(2);
+}
+button{
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border: none;
+    color:black;
+    cursor: pointer;
+    background-color: white;
+    width: 100%;
+    font-size: 16px;
+    font-family: "Audiowide",sans-serif;
+    transition: background-color 0.3s ease;
+}
+.sub{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+button:hover{
+    background-color: rgb(243, 191, 146);
+    color: #0B192C;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+.for{
+    color: white;
+    text-align: center;
+    font-family: "Audiowide",sans-serif;
+    font-size: 15PX;
+    padding: 7px;
+}
+a{
+    text-decoration: none;
+}
+:placeholder-shown{
+     font-family: "Audiowide",sans-serif;
+     font-weight: lighter;
+}
+.col{
+    color: rgb(214, 176, 142);
+    font-size: 15px;
+}
+.e{
+    color: white;
+    font-family: "Audiowide",sans-serif;
+    font-weight: bolder;
+}

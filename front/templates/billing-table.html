@@ -1,0 +1,250 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Billing Table</title>
+    <link rel="stylesheet" href="{% static 'billing-styles.css' %}">
+ 
+</head>
+<body>
+
+    <input type="hidden" id="csrf-token" value="{{ csrf_token }}">
+    <div class="billing-container">
+        <div class="billing-header">
+            <h1>Invoice</h1>
+            <div class="invoice-info">
+                <div class="info-group">
+                    <label>Invoice Number:</label>
+                    <span id="invoice-number">INV-001</span>
+                </div>
+                <div class="info-group">
+                    <label>Date:</label>
+                    <span id="invoice-date"></span>
+                </div>
+                <div class="info-group">
+                    <label>Due Date:</label>
+                    <input type="date" id="due-date">
+                </div>
+                <div class="info-group">
+                    <label>
+                        <a href="/logout/">LOGOUT</a> 
+                    </label>
+                   </div>
+            </div>
+        </div>
+
+        <div class="client-info">
+            <div class="client-section">
+                <h3>Bill To:</h3>
+                <select id="existingCustomer">
+                    <option value="">Select Existing Customer</option>
+                    {% for customer in customers %}
+                        <option value="{{ customer.id }}" data-name="{{ customer.name }}" data-address="{{ customer.address }}" data-email="{{ customer.email }}">
+                            {{ customer.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <input type="checkbox" id="newCustomerToggle"> Add New Customer
+                <div id="newCustomerForm" style="display:none;">
+                    <input type="text" id="client-name" placeholder="Name">
+                    <input type="text" id="client-address" placeholder="Address">
+                    <input type="text" id="client-email" placeholder="Email">
+                    <input type="text" id="client-phone" placeholder="Phone">
+                </div>
+            </div>
+            <div class="company-section">
+                <h3>From:</h3>
+                <input type="text" id="company-name" placeholder="Your Company">
+                <input type="text" id="company-address" placeholder="Your Address">
+                <input type="text" id="company-email" placeholder="Your Email">
+            </div>
+        </div>
+
+        <div class="billing-table-container">
+            <div class="table-controls">
+                <button id="add-row" class="btn btn-primary">+ Add Item</button>
+                <div class="search-container">
+                    <input type="text" id="search" placeholder="Search items...">
+                </div>
+                <div class="tax-control">
+                    <label>Tax Rate (%):</label>
+                    <input type="number" id="tax-rate" value="10" min="0" max="100" step="0.1">
+                </div>
+            </div>
+
+            <table class="billing-table" id="billing-table">
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">
+                            <input type="checkbox" id="select-all">
+                        </th>
+                        <th>Item</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>Discount %</th>
+                        <th>Subtotal</th>
+                        <th>Tax</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <tr class="itemRow">
+                        <td><input type="checkbox" class="row-check"></td>
+                        <td>
+                            <select class="itemSelect">
+                                <option value="">Select Item</option>
+                                {% for item in items %}
+                                    <option value="{{ item.id }}" data-price="{{ item.price }}">{{ item.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td><input type="text" class="itemDescription"></td>
+                        <td><input type="number" class="itemQty" value="1"></td>
+                        <td><input type="text" class="itemPrice" readonly></td>
+                        <td><input type="number" class="itemDiscount" value="0"></td>
+                        <td><span class="itemSubtotal">0.00</span></td>
+                        <td><span class="itemTax">0.00</span></td>
+                        <td><span class="itemTotal">0.00</span></td>
+                        <td><button class="removeRow">Remove</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="billing-summary">
+            <div class="summary-left">
+                <div class="notes-section">
+                    <label for="notes">Notes:</label>
+                    <textarea id="notes" placeholder="Additional notes or terms..."></textarea>
+                </div>
+            </div>
+            <div class="summary-right">
+                <div class="totals">
+                    <div class="total-row">
+                        <span class="total-label">Subtotal:</span>
+                        <span class="total-value" id="subtotal">$0.00</span>
+                    </div>
+                    <div class="total-row">
+                        <span class="total-label">Tax:</span>
+                        <span class="total-value" id="tax-amount">$0.00</span>
+                    </div>
+                    <div class="total-row discount-row" id="discount-row" style="display: none;">
+                        <span class="total-label">Discount:</span>
+                        <span class="total-value" id="discount-amount">-$0.00</span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span class="total-label">Total:</span>
+                        <span class="total-value" id="grand-total">$0.00</span>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="save-invoice" class="btn btn-success">Save Invoice</button>
+                    <button id="print-invoice" class="btn btn-secondary">Print</button>
+                    <button id="export-pdf" class="btn btn-secondary">Export PDF</button>
+                    <button id="clear-all" class="btn btn-danger">Clear All</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+document.getElementById("newCustomerToggle").addEventListener("change", function() {
+    document.getElementById("newCustomerForm").style.display = this.checked ? "block" : "none";
+});
+
+document.getElementById("existingCustomer").addEventListener("change", function() {
+    const selected = this.options[this.selectedIndex];
+    if (selected.value) {
+        document.getElementById("client-name").value = selected.dataset.name;
+        document.getElementById("client-address").value = selected.dataset.address;
+        document.getElementById("client-email").value = selected.dataset.email;
+    }
+});
+
+document.querySelectorAll(".itemSelect").forEach(function(select) {
+    select.addEventListener("change", function() {
+        const price = parseFloat(this.options[this.selectedIndex].dataset.price || 0);
+        this.closest("tr").querySelector(".itemPrice").value = price.toFixed(2);
+    });
+});
+
+document.getElementById("add-row").addEventListener("click", function() {
+    const row = document.querySelector(".itemRow").cloneNode(true);
+    row.querySelectorAll("input, select").forEach(i => {
+        if (i.type !== "checkbox") i.value = "";
+    });
+    row.querySelector(".itemPrice").value = "";
+    document.querySelector("#table-body").appendChild(row);
+
+    row.querySelector(".removeRow").addEventListener("click", function() {
+        row.remove();
+    });
+});
+
+document.querySelectorAll(".removeRow").forEach(btn => {
+    btn.addEventListener("click", function() {
+        btn.closest("tr").remove();
+    });
+});
+
+document.getElementById("save-invoice").addEventListener("click", function() {
+    const isNewCustomer = document.getElementById("newCustomerToggle").checked;
+    const customerData = isNewCustomer ? {
+        name: document.getElementById("client-name").value,
+        email: document.getElementById("client-email").value,
+        address: document.getElementById("client-address").value,
+        phone: document.getElementById("client-phone").value
+    } : {
+        id: document.getElementById("existingCustomer").value
+    };
+
+    const items = [];
+    document.querySelectorAll("#table-body tr").forEach(tr => {
+        const select = tr.querySelector(".itemSelect");
+        if (select.value) {
+            items.push({
+                item: select.options[select.selectedIndex].text,
+                description: tr.querySelector(".itemDescription").value,
+                quantity: parseInt(tr.querySelector(".itemQty").value),
+                unitPrice: parseFloat(tr.querySelector(".itemPrice").value),
+                discount: parseFloat(tr.querySelector(".itemDiscount").value || 0)
+            });
+        }
+    });
+
+    const invoiceData = {
+        client: customerData,
+        isNewCustomer: isNewCustomer,
+        items: items,
+        company: {
+            name: document.getElementById("company-name").value,
+            address: document.getElementById("company-address").value,
+            email: document.getElementById("company-email").value
+        },
+        totals: {
+            subtotal: items.reduce((sum,i)=>sum + i.quantity*i.unitPrice,0),
+            tax: 0,
+            discount: 0,
+            grandTotal: items.reduce((sum,i)=>sum + i.quantity*i.unitPrice,0)
+        }
+    };
+
+    fetch("/save-invoice/", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(invoiceData)
+    })
+    .then(res=>res.json())
+    .then(data=>alert("Invoice saved! ID: "+data.invoice_id))
+    .catch(err=>console.error(err));
+});
+</script>
+
+<script src="{% static 'billing-script.js' %}"></script>
+</body>
+</html>

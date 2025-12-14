@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'emp.css' %}">
+</head>
+
+<body>
+  
+        <!-- title -->
+    <h1 class="tit">USER SIGN UP</h1>
+    
+        <!-- login box -->
+   <div class="box">
+    <!-- emp id  -->
+    <div class="first">
+        <form action="" method="POST" >
+        <!-- id -->
+         {% csrf_token %}
+         {{pas}}
+        <input type="submit" name="sign up">
+        
+        </form></div>
+        
+       
+        
+      
+</body>
+</html>

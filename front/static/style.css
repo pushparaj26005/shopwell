@@ -1,0 +1,145 @@
+*{
+    background-color:  #0B192C;
+    margin: 0px;
+    padding: 0px;
+    
+}
+/* title */
+.til{
+    text-align: center;
+    margin-left: 200px;
+    font-size:60px;
+    color: white;
+    background-color:#27445D;
+    font-family: "Audiowide",sans-serif;
+    font-weight: lighter;
+}
+/* navigation bar */
+.bar {
+    
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#27445D;
+    color: black;
+    padding: 10px 20px;
+}
+/* logo conainer */
+.c{
+    width: 60px;
+    border-radius: 15px;
+    margin-left: 1px;
+    background-color:#27445D;
+}
+/* size logo */
+.logo{
+    width: 60px;
+    border-radius: 15px;
+    background-color:#27445D;
+}
+/* button and design till end */
+.det{
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    background-color:#27445D;
+}
+.bar .det li a{
+    text-decoration: none;
+    color: white;
+    text-align: right;
+    font-size: 20px;
+    background-color:#27445D;
+    font-family: "Audiowide",sans-serif;
+}
+.bar .det li a:hover{
+     color: rgb(243, 191, 146) ;
+   text-transform:lowercase;
+}
+.b{
+background-color: #1E3E62;
+margin-right: 20px;
+}
+.login{
+  
+  justify-content: center;
+  margin-top: 100px;
+  display: flex;
+  text-align: center;
+  font-family: "Audiowide",sans-serif;
+  font-size: 30px;
+  
+  animation: float-up-down 2s ease-in-out infinite
+}
+
+.login a{
+    color: black;
+    text-decoration: none;
+    background-color: white;
+    border-radius: 10px;
+    width: 300px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    
+}
+.user{
+  justify-content: center;
+  margin-top: 70px;
+  display: flex;
+  text-align: center;
+  font-family: "Audiowide",sans-serif;
+  font-size: 30px; 
+  
+  animation: float-up-down 2s ease-in-out infinite
+}
+
+.user a{
+    color: black;
+    text-decoration: none;
+    background-color: white;
+    border-radius: 10px;
+    width: 300px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+.login:hover{
+transform: translateY(-10px);
+}
+.user:hover{
+    transform: translateY(-10px);
+}
+.login a:hover{
+ background-color: rgb(236, 181, 132) ;
+}
+.user a:hover{
+     background-color:  rgb(236, 181, 132)  ;
+}
+/* login container */
+.con{
+     border-radius: 15px;
+    box-shadow: 0 0 20px rgba(230, 227, 227, 0.2);
+    padding: 10px 20px;
+    transition: transform 0.2s;
+    width: 400px;
+    height: 400px;
+    text-align: center;
+    margin-top: 100px;
+    margin-left: 550px;   
+}
+@keyframes float-up-down {
+   
+    0%, 100% {
+        transform: translateY(0);
+        background-color: #0B192C;
+    }
+    
+    50% {
+        background-color: #0B192C;
+        transform: translateY(-15px);
+    }
+}
+.main{
+    text-align: center;
+    font-family: "Audiowide",sans-serif;
+    color: white;
+    margin-top: 20px;
+    font-weight:lighter;
+}

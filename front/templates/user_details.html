@@ -1,0 +1,47 @@
+  {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+    
+    <link rel="stylesheet" href="{% static 'table.css' %}">
+</head>
+<body>
+    
+    <h1>USER UPDATE</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>CODE</th>
+            </tr>
+        </thead>
+        <tbody>
+        {%for i in US%}
+        <tr>
+            <td>{{i.name}}</td>
+            <td>{{i.code}}</td>
+         <td>
+    <a href="{% url 'update' i.id %}">
+        <button>update</button></a>
+   </td>
+
+<td>
+    <a href="{% url 'user_delete' i.id %}">
+        <button>delete</button>
+</a>
+</td>
+
+                 
+        </tr>
+
+        {%endfor%}
+    </tbody>
+    </table>
+    
+</body>
+</html>
