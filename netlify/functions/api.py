@@ -12,11 +12,10 @@ if os.environ.get('IS_NETLIFY') == 'true':
     except Exception as e:
         print("Migration failed:", e)
 
-# Create the WSGI application
-application = get_wsgi_application()
-
-# Mangum works with ASGI natively but can wrap WSGI or we can just import ASGI
-# Let's import the ASGI one to be safer for Mangum:
 from rms.asgi import application as asgi_application
 
-handler = Mangum(asgi_application, lifespan="off")
+# Strip the base Netlify function path so Django router recognizes the URL properly
+mangum_handler = Mangum(asgi_application, lifespan="off", api_gateway_base_path="/.netlify/functions/api")
+
+def handler(event, context):
+    return mangum_handler(event, context)
