@@ -1,44 +1,46 @@
-  {% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
-    <link rel="stylesheet" href="emp.css">
-    <link rel="stylesheet" href="{% static 'emp.css' %}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+  <link rel="stylesheet" href="{% static 'emp.css' %}">
 </head>
+
 <body>
-    <form action="" method="POST" >    <!-- title -->
-      {% csrf_token %}
+  <form action="" method="POST"> <!-- title -->
+    {% csrf_token %}
     <h1 class="tit">USER LOGIN</h1>
-    
+
     <!-- login box -->
-   <div class="box">
-    <!-- user id  -->
-    <div class="first">
-        
+    <div class="box">
+      <!-- user id  -->
+      <div class="first">
+
         <!-- id -->
         <label for="userid">USER ID</label>
         <input type="text" id="id" name="id" placeholder="Enter Your Id">
-        </div>
-        
-       <div class="second">
-         <!-- pass-->
-          
-            <label for="password">PASSWORD</label>
+      </div>
+
+      <div class="second">
+        <!-- pass-->
+
+        <label for="password">PASSWORD</label>
         <input type="password" id="pass" name="pass" placeholder="Enter Your Password">
-       </div>
-       <div class="e">
-            <p>{{error}}</p>
-        </div>
-       <div class="sub">
-    <button type="submit">LOGIN</button>
+      </div>
+      <div class="e">
+        <p>{{error}}</p>
+      </div>
+      <div class="sub">
+        <button type="submit">LOGIN</button>
+      </div>
+      <a class="for" href="/rsin/fog/" href="for.html">FORGET PASSWORD?</a>
+      <a class="for col" href="{% url 'authentication:signup' %}">Sign Up</a>
     </div>
-<a  class="for" href="/rsin/fog/" href="for.html">FORGET PASSWORD?</a>
-<a  class="for col" href="{% url 'authentication:signup' %}" >Sign Up</a>
-</div>
-</form>
+  </form>
 </body>
+
 </html>
