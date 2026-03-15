@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'rms.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-if os.environ.get('VERCEL') == '1' or os.environ.get('NETLIFY') == 'true':
+if os.environ.get('VERCEL') == '1' or os.environ.get('IS_NETLIFY') == 'true':
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -130,7 +130,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-if os.environ.get('VERCEL') == '1' or os.environ.get('NETLIFY') == 'true':
+if os.environ.get('VERCEL') == '1' or os.environ.get('IS_NETLIFY') == 'true':
     STATIC_ROOT = '/tmp/staticfiles'
 else:
     STATIC_ROOT = BASE_DIR / 'staticfiles'

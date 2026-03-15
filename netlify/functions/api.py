@@ -5,7 +5,7 @@ from django.core.wsgi import get_wsgi_application
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rms.settings')
 
 # Run migrations if on Netlify lambda
-if os.environ.get('NETLIFY') == 'true':
+if os.environ.get('IS_NETLIFY') == 'true':
     from django.core.management import call_command
     try:
         call_command('migrate', interactive=False)
