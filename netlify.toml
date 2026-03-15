@@ -1,14 +1,9 @@
 [build]
-  command = "chmod +x build_files.sh && ./build_files.sh"
-  publish = "staticfiles"
+  command = "chmod +x build_files.sh && ./build_files.sh && mkdir -p public/static && cp -r staticfiles/* public/static/"
+  publish = "public"
 
 [functions]
   directory = "netlify/functions"
-
-[[redirects]]
-  from = "/static/*"
-  to = "/static/:splat"
-  status = 200
 
 [[redirects]]
   from = "/*"

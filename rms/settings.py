@@ -130,7 +130,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-if os.environ.get('VERCEL') == '1' or os.environ.get('IS_NETLIFY') == 'true':
+if os.environ.get('VERCEL') == '1':
     STATIC_ROOT = '/tmp/staticfiles'
 else:
     STATIC_ROOT = BASE_DIR / 'staticfiles'
