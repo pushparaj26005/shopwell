@@ -128,6 +128,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "front" / "static",
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 AUTH_USER_MODEL = 'authentication.User'

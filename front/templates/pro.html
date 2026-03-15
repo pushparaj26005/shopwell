@@ -1,15 +1,16 @@
-  {% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
     <link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
-  
+
     <link rel="stylesheet" href="{% static 'table.css' %}">
 </head>
+
 <body>
     <h1>all prodouct</h1>
     <table>
@@ -24,29 +25,30 @@
             </tr>
         </thead>
         <tbody>
-        {%for i in rd%}
-        <tr>
-            <td>{{i.name}}</td>
-            <td>{{i.adress}}</td>
-            <td>{{i.phone_number}}</td>
-            <td>{{i.age}}</td>
-         <td>
-    <a href="{% url 'prod_up' i.id %}">
-        <button>update</button></a>
-   </td>
+            {%for i in rd%}
+            <tr>
+                <td>{{i.name}}</td>
+                <td>{{i.adress}}</td>
+                <td>{{i.phone_number}}</td>
+                <td>{{i.age}}</td>
+                <td>
+                    <a href="{% url 'prod_up' i.id %}">
+                        <button>update</button></a>
+                </td>
 
-<td>
-    <a href="{% url 'prod' i.id %}">
-        <button>delete</button>
-</a>
-</td>
+                <td>
+                    <a href="{% url 'prod' i.id %}">
+                        <button>delete</button>
+                    </a>
+                </td>
 
-                 
-        </tr>
 
-        {%endfor%}
-    </tbody>
+            </tr>
+
+            {%endfor%}
+        </tbody>
     </table>
-    
+
 </body>
+
 </html>
