@@ -15,5 +15,9 @@
             "src": "/(.*)",
             "dest": "rms/wsgi.py"
         }
-    ]
+    ],
+    "env": {
+        "DEBUG": "False",
+        "VERCEL": "1"
+    }
 }
